@@ -4,6 +4,7 @@ import { ILogger } from '../logger/logger.interface';
 import { injectable } from 'inversify';
 import 'reflect-metadata';
 
+//@ts-ignore
 @injectable()
 export abstract class BaseController {
 	private readonly _router: Router;
