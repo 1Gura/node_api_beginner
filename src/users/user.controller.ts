@@ -7,8 +7,12 @@ import { ILogger } from '../logger/logger.interface';
 import 'reflect-metadata';
 import { IUsersController } from './user.controller.interface';
 
+class User {}
+
 @injectable()
 export class UserController extends BaseController implements IUsersController {
+	private users: User[] = [];
+
 	constructor(@inject(TYPES.ILogger) private loggerService: ILogger) {
 		super(loggerService);
 		this.bindRoutes([
