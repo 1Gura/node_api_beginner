@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/express": "^4.17.21",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "clinic": "^13.0.0",
     "doctor": "^0.3.0",
@@ -27,6 +28,7 @@
     "tslog": "^4.9.2"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
     "eslint": "8.22.0",
