@@ -3,6 +3,7 @@ import { ExpressReturnType, IControllerRoute } from './route.interface';
 import { ILogger } from '../logger/logger.interface';
 import { injectable } from 'inversify';
 import 'reflect-metadata';
+import { IMiddleware } from './middleware.interface';
 
 //@ts-ignore
 @injectable()
@@ -33,8 +34,12 @@ export abstract class BaseController {
 	protected bindRoutes(routes: IControllerRoute[]): void {
 		for (const route of routes) {
 			this.logger.log(`[${route.method}] ${route.path}`);
+			const middlewares = route.middlewares?.map((middleware: IMiddleware) =>
+				middleware.execute.bind(middleware),
+			);
 			const handler = route.func.bind(this);
-			this.router[route.method](route.path, handler);
+			const pipeLine = middlewares ? [...middlewares, handler] : handler;
+			this.router[route.method](route.path, pipeLine);
 		}
 	}
 }

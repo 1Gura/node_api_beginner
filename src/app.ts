@@ -23,7 +23,7 @@ export class App {
 		this.port = 8001;
 	}
 
-	useMiddleware(): void {
+	public useMiddleware(): void {
 		this.app.use(json());
 	}
 
