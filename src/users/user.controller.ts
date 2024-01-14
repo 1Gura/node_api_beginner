@@ -6,6 +6,8 @@ import { TYPES } from '../types';
 import { ILogger } from '../logger/logger.interface';
 import 'reflect-metadata';
 import { IUsersController } from './user.controller.interface';
+import { UserLoginDto } from './dto/user-login.dto';
+import { UserRegisterDto } from './dto/user-register.dto';
 
 class User {}
 
@@ -21,11 +23,13 @@ export class UserController extends BaseController implements IUsersController {
 		]);
 	}
 
-	public login(req: Request, res: Response, next: NextFunction): void {
+	public login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
+		console.log(req.body);
 		next(new HttpError(401, 'Not auth', 'login'));
 	}
 
-	public register(req: Request, res: Response, next: NextFunction): void {
+	public register(req: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction): void {
+		console.log(req.body);
 		this.ok(res, 'login');
 	}
 }
