@@ -4,9 +4,10 @@ import { inject, injectable } from 'inversify';
 import 'reflect-metadata';
 import { TYPES } from './types';
 import { ILogger } from './logger/logger.interface';
-import { UserController } from './users/user.controller';
-import { ExceptionFilter } from './errors/exception.filter';
 import { json } from 'body-parser';
+import { IExceptionFilter } from './errors/exception.filter.interface';
+import { IConfigService } from './config/config.service.interface';
+import { UserController } from './users/user.controller';
 
 @injectable()
 export class App {
@@ -17,10 +18,11 @@ export class App {
 	constructor(
 		@inject(TYPES.ILogger) private loggerService: ILogger,
 		@inject(TYPES.UserController) private userController: UserController,
-		@inject(TYPES.ExceptionFilter) private exceptionFilter: ExceptionFilter,
+		@inject(TYPES.ExceptionFilter) private exceptionFilter: IExceptionFilter,
+		@inject(TYPES.ConfigService) private configService: IConfigService,
 	) {
 		this.app = express();
-		this.port = 8001;
+		this.port = 8000;
 	}
 
 	public useMiddleware(): void {
